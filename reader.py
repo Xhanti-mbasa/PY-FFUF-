@@ -10,4 +10,6 @@ def file_reader(file_path: str) -> list[str]:
         return []
     
 if __name__ == "__main__":
-    print(file_reader("wordlist.txt"))
+    words = file_reader("wordlist.txt")
+    for word in words:
+        print(word)  
