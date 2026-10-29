@@ -10,7 +10,8 @@ def send_request(url):
         print(f"Size: {len(response.content)} bytes")
         print(f"Time: {response.elapsed.total_seconds():.3f}s")
 
-    except httpx.RequestError as errors:
+    except httpx.RequestError as error:
         print(f"request failed: {error}")
 
-send_request("https://ai.wethinkcode.co.za/survey-for-professionals?name=Mr.%20Xhanti%20Daka&email=xhmohcpt025@student.wethinkcode.co.za")
+terminal_input = input("Input the url here: ")
+send_request(terminal_input)
