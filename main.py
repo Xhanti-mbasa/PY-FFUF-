@@ -1,30 +1,23 @@
 import httpx 
+#from reader import file_reader
 
 def send_request(url):
     try:
         response = httpx.get(url, timeout=10)
 
-        Response = {
+        response_data = {
             "URL": url,
-            #"Request": response.request,
-            #"Method": response.method,
-            #"Headers": dict(response.headers),
+            "Headers": dict(response.headers),
+            "Method": response.request.method,
             "Status": response.status_code,
             "Size": len(response.content),
             "Time": round(response.elapsed.total_seconds(), 3)
         }
-        return Response
-        #print(f"URL: {url}")
-        #print(f"Method: {response.headers}") #Still thinking about this feature
-        #heads = {"Method": dict(response.headers)}
-        #print(heads)
-        #print(f"Status: {response.status_code}")
-        #print(f"Size: {len(response.content)} bytes")
-        #print(f"Time: {response.elapsed.total_seconds():.3f}s")
-
+        return response_data
+    
     except httpx.RequestError as error:
-        print(f"request failed: {error}")
-
+        return {"Error": str(error)}
+    
 terminal_input = input("Input the url here: ")
 result = send_request(terminal_input)
 print(result)
