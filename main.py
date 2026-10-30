@@ -27,7 +27,7 @@ def fuzzer(fuzzed_url):
             for word in word_list:
                 switcher = re.sub(r"fuzz", lambda _: word, fuzzed_url, flags=re.I)
                 response = send_request(switcher)
-                result.append(send_request(response))
+                result.append(response)
                 print(result)
                 return result
     else:
