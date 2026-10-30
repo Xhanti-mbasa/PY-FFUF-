@@ -19,10 +19,6 @@ def send_request(url):
     except httpx.RequestError as error:
         return {"Error": str(error)}
     
-# terminal_input = input("Input the url here: ")
-# result = send_request(terminal_input)
-# print(result)
-
 def fuzzer(fuzzed_url):
     word_list = file_reader("wordlist.txt") #Takes the word list and imports it into this function.
     searcher = re.search("fuzz", fuzzed_url, re.I)
@@ -30,10 +26,13 @@ def fuzzer(fuzzed_url):
             result = []
             for word in word_list:
                 switcher = re.sub(r"fuzz", lambda _: word, fuzzed_url, flags=re.I)
-                result.append(send_request(switcher))
-                print(switcher, result)
+                response = send_request(switcher)
+                result.append(send_request(response))
+                print(result)
+                return result
     else:
             print("Invalid URL to fuzz")
+            return  []
              
 if __name__ == "__main__":
     fuzzer_input = input("Insert fuzzer url: ")
